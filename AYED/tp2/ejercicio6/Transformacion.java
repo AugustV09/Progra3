@@ -11,35 +11,42 @@ public class Transformacion {
 	}
 	
 	public BinaryTree<Integer> suma(){
-		BinaryTree<Integer> arbol = suma_private(ab);
+		BinaryTree<Integer> arbol = new BinaryTree<Integer>();
+		
+		suma_private(ab, arbol);	//HELPER
+									//Que deberia hacer con el entero final que me devuelve???
+		
 		return arbol;
 	}
 	
 	
-	private BinaryTree<Integer> suma_private(BinaryTree<Integer> arbol) {
+	private int suma_private(BinaryTree<Integer> arbol, BinaryTree<Integer> arbol2) {
 		if (arbol == null || arbol.isEmpty()) {
-			return null;
+			return 0;
 		}
 		else {
-			BinaryTree<Integer> aux = new BinaryTree<Integer>();
-			int suma =0;
-			if (arbol.hasLeftChild()) {			//CUENTA COMO RECORRER UNA VEZ???
-				suma+=arbol.getLeftChild().getData();
-				aux.addLeftChild(suma_private(arbol.getLeftChild()));
+			int suma = arbol.getData();
+			if (arbol.hasLeftChild()) {	
+				
+				arbol2.addLeftChild(new BinaryTree<Integer>());
+				suma+= suma_private(arbol.getLeftChild(),arbol2.getLeftChild());
+
 			}
-			if (arbol.hasRightChild()) {		//CUENTA COMO RECORRER UNA VEZ???
-				suma+=arbol.getRightChild().getData();			
-				aux.addRightChild(suma_private(arbol.getRightChild()));
+			if (arbol.hasRightChild()) {		
+
+				arbol2.addRightChild(new BinaryTree<Integer>());
+				suma+= suma_private(arbol.getRightChild(),arbol2.getRightChild());
+				
 			}
 			
-			aux.setData(suma);
+			arbol2.setData(suma-arbol.getData());
 			
-			return aux;
+			return suma;
 			
 		}
+		
 	}
 	
-	/*No sabria decir si el recorrido del arbol se da dos veces porque con suma solo me quedo con el dato del arbol y sigo con el recorrido, lo cual si hace 
-	 * la siguiente linea a cada suma*/
+	
 	
 }
