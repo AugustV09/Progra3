@@ -13,19 +13,26 @@ public class Transformacion {
 	public BinaryTree<Integer> suma(){
 		BinaryTree<Integer> arbol = new BinaryTree<Integer>();
 		
-		suma_private(ab, arbol);	//HELPER
-									//Que deberia hacer con el entero final que me devuelve???
+		if (suma_private(ab, arbol) == 0) arbol = null;;		//HELPER
+																//Que deberia hacer con el entero final que me devuelve???
 		
 		return arbol;
 	}
 	
 	
 	private int suma_private(BinaryTree<Integer> arbol, BinaryTree<Integer> arbol2) {
-		if (arbol == null || arbol.isEmpty()) {
+		if (arbol == null) {
 			return 0;
 		}
+		
+		else if (arbol.isLeaf()) {
+			arbol2.setData(0);
+			return -1;
+		}
+		
 		else {
-			int suma = arbol.getData();
+			
+			int suma = arbol.getData();			//podria simplificarlo pero deberia hacer un casteo, ESTARIA BIEN????
 			if (arbol.hasLeftChild()) {	
 				
 				arbol2.addLeftChild(new BinaryTree<Integer>());
