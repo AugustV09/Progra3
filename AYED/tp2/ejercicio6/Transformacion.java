@@ -11,46 +11,40 @@ public class Transformacion {
 	}
 	
 	public BinaryTree<Integer> suma(){
-		BinaryTree<Integer> arbol = new BinaryTree<Integer>();
 		
-		if (suma_private(ab, arbol) == 0) arbol = null;;		//HELPER
-																//Que deberia hacer con el entero final que me devuelve???
+		if (this.ab != null) {
+			if (!this.ab.isLeaf()) {
+				int izq =0, der =0;
+				if (this.ab.hasLeftChild()) izq = suma_private(this.ab.getLeftChild());		//HELPER
+				if (this.ab.hasRightChild()) der = suma_private(this.ab.getRightChild());	//HELPER
+				this.ab.setData(izq+der);
+			}
+			else this.ab.setData(0);
+		}
 		
-		return arbol;
+		return this.ab;  
+					
 	}
 	
 	
-	private int suma_private(BinaryTree<Integer> arbol, BinaryTree<Integer> arbol2) {
-		if (arbol == null) {
-			return 0;
+	private int suma_private(BinaryTree<Integer> arbol) {
+		
+		int suma = 0;										
+		if (arbol.hasLeftChild()) {	
+			
+			suma+= suma_private(arbol.getLeftChild());
+
+		}
+		if (arbol.hasRightChild()) {		
+
+			suma+= suma_private(arbol.getRightChild());
+			
 		}
 		
-		else if (arbol.isLeaf()) {
-			arbol2.setData(0);
-			return -1;
-		}
+		arbol.setData(suma);
 		
-		else {
+		return (suma+arbol.getData());
 			
-			int suma = arbol.getData();			//podria simplificarlo pero deberia hacer un casteo, ESTARIA BIEN????
-			if (arbol.hasLeftChild()) {	
-				
-				arbol2.addLeftChild(new BinaryTree<Integer>());
-				suma+= suma_private(arbol.getLeftChild(),arbol2.getLeftChild());
-
-			}
-			if (arbol.hasRightChild()) {		
-
-				arbol2.addRightChild(new BinaryTree<Integer>());
-				suma+= suma_private(arbol.getRightChild(),arbol2.getRightChild());
-				
-			}
-			
-			arbol2.setData(suma-arbol.getData());
-			
-			return suma;
-			
-		}
 		
 	}
 	

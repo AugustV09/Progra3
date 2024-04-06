@@ -24,7 +24,7 @@ public class PruebaParcialArboles7 {
 		int aux = (int) (Math.random() * 50);
 		BinaryTree<Integer> b = new BinaryTree<Integer>(aux);
 
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 5; i++) {
 
 			añadirDato(b, aux);
 			aux = (int) (Math.random() * 100);
@@ -34,16 +34,14 @@ public class PruebaParcialArboles7 {
 	}
 	
 	public static void main(String[] args) {
-		BinaryTree<Integer> ab = new BinaryTree<Integer>(2);
-		ab.addLeftChild(new BinaryTree<Integer>(3));
-		ab.addRightChild(new BinaryTree<Integer>(4));
-		ab.getLeftChild().addLeftChild(new BinaryTree<Integer>(5));
+		BinaryTree<Integer> ab = creadorArboles();
 		
 		ParcialArboles p = new ParcialArboles(ab);
 		
 		ab.entreNiveles(0, 50);
 		
-		System.out.println("\n\n\n"+p.isLeftTree(2));
+		System.out.println("\n\n\n"+p.isLeftTree(9));
+		
 
 	}
 

@@ -45,13 +45,13 @@ public static void creadordeArbol2(BinaryTree<Integer> ab,int i){
 	
 	public static void main(String[] args) {
 		BinaryTree<Integer> ab= new BinaryTree<Integer>(2);
-		ab.addLeftChild(new BinaryTree<Integer>(4));
-		ab.addRightChild(new BinaryTree<Integer>(6));
+		ab.addLeftChild(new BinaryTree<Integer>(19));
+		ab.addRightChild(new BinaryTree<Integer>(11));
 
 		//creadordeArbol2(ab,0);
 		
 		ContadorArbol c = new ContadorArbol(ab);
-		List<Integer> numeros = c.numerosParesPreOrden();
+		List<Integer> numeros = c.numerosParesInOrden();
 
 		for (Integer integer : numeros) {
 			System.out.println(integer);
