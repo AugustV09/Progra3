@@ -59,12 +59,15 @@ public class GeneralTree<T> {
 		}
 	}
 	
-
+	
 	public boolean equals (GeneralTree<T> ga){
 		boolean resultado = false;
 		
 		if (ga!= null){
-			if (this.getData().equals(ga.getData()) && this.getChildren().equals(ga.getChildren())) resultado = true;
+			if (this.hasChildren() && ga.hasChildren()) {
+				if (this.getData().equals(ga.getData()) && this.getChildren().equals(ga.getChildren())) resultado = true;
+			}
+			else if (!this.hasChildren() && !ga.hasChildren() && this.getData().equals(ga.getData())) resultado = true;
 		}
 		
 		return resultado;
