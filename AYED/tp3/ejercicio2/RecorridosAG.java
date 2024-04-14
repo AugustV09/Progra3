@@ -115,4 +115,9 @@ public class RecorridosAG {
 		 
 		 return numeros;
 	 }
+	 
+	 
+	 /*b) Si tuviera que implementar estos recorridos en la clase GeneralTree<T> todas las implementaciones 
+	  * serian iguales salvo por recibir el arbol en cada metodo publico. SIn embargo, si seguiria creando
+	  * metodos privados para realizar la tarea que me piden*/
 }
