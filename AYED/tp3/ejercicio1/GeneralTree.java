@@ -148,7 +148,7 @@ public class GeneralTree<T> {
 				}
 				
 			} 
-			if (!cola.isEmpty()) return alt; //Esta linea es para confirmar que se encontro el DATO
+			if (!resultado) return alt; //Esta linea es para confirmar que se encontro el DATO
 			else return -1;	//Si no se encuentra al DATO, devuelve -1
 		}
 		
@@ -181,5 +181,53 @@ public class GeneralTree<T> {
 		}
 		return cant_max;
 	}
+	
+	public boolean esAncestro(T a, T b) {
+		if (!this.isEmpty() && a!=null && b != null) {
+			GeneralTree<T> tree_aux = buscarAncestro_private(this,a);
+			if (tree_aux != null) {
+				return buscarDescendiente_private(tree_aux,b);
+			}
+		}
+		return false;
+		
+	}
+
+	private GeneralTree<T> buscarAncestro_private (GeneralTree<T> ga,T a){
+		
+		if (ga.getData().equals(a)) return ga; //Si el dato del arbol coincide, retorna el arbol
+		if (ga.hasChildren()) {  //Si el arbol tiene hijos, inicia la busqueda dentro del arbol
+			boolean resultado = true;
+			List<GeneralTree<T>> children = ga.getChildren();
+			GeneralTree<T> tree_aux=null;
+			for (int i = 0; i < children.size() && resultado; i++) {
+				tree_aux = buscarAncestro_private(children.get(i), a);
+				if (tree_aux != null) {
+					resultado = false;
+				}
+			}
+			return tree_aux;
+			
+		}
+		return null;  //Si el arbol no tiene hijos, retorna NULL y puede retornarlo al publico o a la siguiente busqueda dentro de la lista de hijos
+	}
+	
+	private boolean buscarDescendiente_private(GeneralTree<T> ga, T b) {
+		
+		if (ga.getData().equals(b)) return true;
+		if (ga.hasChildren()) {
+			boolean resultado = false;
+			List<GeneralTree<T>> children = ga.getChildren();
+			for (int i = 0; i < children.size() && !resultado; i++) {
+				resultado = buscarDescendiente_private(children.get(i),b);
+			}
+			return resultado;
+		}
+		return false;
+	}
+	
+	
+	
+	
 	
 }
