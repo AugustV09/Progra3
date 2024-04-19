@@ -189,7 +189,7 @@ public class GeneralTree<T> {
 				return buscarDescendiente_private(tree_aux,b);
 			}
 		}
-		return false;
+		return false;  //Solo este return es suficiente por si algo no se cumple ya que acabaria saliendo a este return si algunas de las condiciones no se cumple
 		
 	}
 
@@ -200,8 +200,10 @@ public class GeneralTree<T> {
 			boolean resultado = true;
 			List<GeneralTree<T>> children = ga.getChildren();
 			GeneralTree<T> tree_aux=null;
-			for (int i = 0; i < children.size() && resultado; i++) {
+			int i =0;
+			while (i<children.size() && resultado) {  //Utilizo un while porque utilizo una variable boolean como corte anticipado
 				tree_aux = buscarAncestro_private(children.get(i), a);
+				i++;
 				if (tree_aux != null) {
 					resultado = false;
 				}
@@ -212,22 +214,22 @@ public class GeneralTree<T> {
 		return null;  //Si el arbol no tiene hijos, retorna NULL y puede retornarlo al publico o a la siguiente busqueda dentro de la lista de hijos
 	}
 	
+	
 	private boolean buscarDescendiente_private(GeneralTree<T> ga, T b) {
 		
 		if (ga.getData().equals(b)) return true;
 		if (ga.hasChildren()) {
 			boolean resultado = false;
 			List<GeneralTree<T>> children = ga.getChildren();
-			for (int i = 0; i < children.size() && !resultado; i++) {
+			int i =0;
+			while (i<children.size() && !resultado) {   //Utilizo un while porque utilizo una variable boolean como corte anticipado
 				resultado = buscarDescendiente_private(children.get(i),b);
+				i++;
 			}
 			return resultado;
 		}
 		return false;
 	}
-	
-	
-	
 	
 	
 }
