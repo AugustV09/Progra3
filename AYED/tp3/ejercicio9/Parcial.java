@@ -44,13 +44,14 @@ public class Parcial {
 		
 		cola.enqueue(arbol);
 		
-		int min = Integer.MAX_VALUE;
+		int min;
 		
 		while (!cola.isEmpty()) {
 			
 			tree_aux = cola.dequeue();
 			
 			if (tree_aux.hasChildren()) {
+				min = Integer.MAX_VALUE;
 				for (GeneralTree<Integer> i : tree_aux.getChildren()) {
 					if (i.getData() < arbol.getData()) return false;
 					if (i.getData()< min) min = i.getData();
