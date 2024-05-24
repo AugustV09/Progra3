@@ -14,6 +14,7 @@ public class AdjMatrixGraph<T> implements Graph<T>{
 		maxVertices = maxVert;
 		vertices = new ArrayList<AdjMatrixVertex<T>>();
 		adjMatrix = new int [maxVertices][maxVertices];
+		//DEBERIA INICIALIZAR LA MATRIZ CON EL VALOR PARA VACIOS????
 	}
 	
 	@Override
@@ -44,69 +45,105 @@ public class AdjMatrixGraph<T> implements Graph<T>{
 
 	@Override
 	public Vertex<T> search(T data) {
-		// TODO Auto-generated method stub
+		int i=0;
+		while (i<maxVertices) {
+			if (vertices.get(i).getData().equals(data)) return (vertices.get(i));
+			i++;
+		}
 		return null;
 	}
 
 	@Override
 	public void connect(Vertex<T> origin, Vertex<T> destination) {
-		// TODO Auto-generated method stub
+		//ESTO DA ERROR, como lo hago???
+		int posOrigin = origin.getPosition(), posDest = destination.getPosition();
+		
+		if (vertices.get(posOrigin) == origin && vertices.get(posDest) == destination) {
+			adjMatrix[posOrigin][posDest] = EMPTY_VALUE;	//ESTA BIEN?
+		}
 		
 	}
 
 	@Override
 	public void connect(Vertex<T> origin, Vertex<T> destination, int weight) {
-		// TODO Auto-generated method stub
+		int posOrigin = origin.getPosition(), posDest = destination.getPosition();
+		
+		if (vertices.get(posOrigin) == origin && vertices.get(posDest) == destination) {
+			adjMatrix[posOrigin][posDest] = weight;
+		}
 		
 	}
 
 	@Override
 	public void disconnect(Vertex<T> origin, Vertex<T> destination) {
-		for (Vertex<T> v : vertices) {
-			
-		}		
+		int posOrigin = origin.getPosition(), posDest = destination.getPosition();
+		
+		if (vertices.get(posOrigin) == origin && vertices.get(posDest) == destination) {
+			adjMatrix[posOrigin][posDest] = EMPTY_VALUE;
+		}
 	}
 
 	@Override
 	public boolean existsEdge(Vertex<T> origin, Vertex<T> destination) {
-		// TODO Auto-generated method stub
+		int posOrigin = origin.getPosition(), posDest = destination.getPosition();
+		
+		if (vertices.get(posOrigin) == origin && vertices.get(posDest) == destination) {
+			return (adjMatrix[posOrigin][posDest] != EMPTY_VALUE);
+		}
+		
 		return false;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		
+		return (vertices.size()==0);
 	}
 
 	@Override
 	public List<Vertex<T>> getVertices() {
-		// TODO Auto-generated method stub
-		return null;
+		return vertices;	//QUÉ DEBERIA HACER ACA????
 	}
 
 	@Override
 	public int weight(Vertex<T> origin, Vertex<T> destination) {
-		// TODO Auto-generated method stub
+		
+		int posOrigin = origin.getPosition(), posDest = destination.getPosition();
+		
+		if (vertices.get(posOrigin) == origin && vertices.get(posDest) == destination) {
+			if (adjMatrix[posOrigin][posDest] != EMPTY_VALUE) return adjMatrix[posOrigin][posDest];	
+		}
+		
 		return 0;
 	}
 
 	@Override
 	public List<Edge<T>> getEdges(Vertex<T> v) {
-		// TODO Auto-generated method stub
+		
+		int pos = v.getPosition();
+		
+		if (vertices.get(pos) == v) {
+			List<Edge<T>> edges = new ArrayList<Edge<T>>();
+			for (int i=0; i<maxVertices; i++) {
+				if (adjMatrix[pos][i] != EMPTY_VALUE) edges.add(new AdjMatrixEdge<T>(vertices.get(i), adjMatrix[pos][i]));
+			}
+			
+			return edges;
+		}
+		
 		return null;
 	}
 
 	@Override
 	public Vertex<T> getVertex(int position) {
-		// TODO Auto-generated method stub
-		return null;
+	
+		return vertices.get(position);
 	}
 
 	@Override
 	public int getSize() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return vertices.size();
 	}
 
 }
