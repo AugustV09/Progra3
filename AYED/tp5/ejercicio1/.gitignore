@@ -4,3 +4,6 @@
 /AdjMatrixGraph.class
 /AdjMatrixVertex.class
 /AdjMatrixEdge.class
+/AdjListGraph.class
+/AdjListVertex.class
+/AdjListEdge.class

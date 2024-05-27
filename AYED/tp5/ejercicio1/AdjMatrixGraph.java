@@ -55,43 +55,54 @@ public class AdjMatrixGraph<T> implements Graph<T>{
 
 	@Override
 	public void connect(Vertex<T> origin, Vertex<T> destination) {
-		//ESTO DA ERROR, como lo hago???
-		int posOrigin = origin.getPosition(), posDest = destination.getPosition();
-		
-		if (vertices.get(posOrigin) == origin && vertices.get(posDest) == destination) {
-			adjMatrix[posOrigin][posDest] = EMPTY_VALUE;	//ESTA BIEN?
-		}
+		/*No hay contenido porque mi EMPTY_VALUE es cero y una matriz de enteros se inicializa en cero*/
 		
 	}
 
 	@Override
 	public void connect(Vertex<T> origin, Vertex<T> destination, int weight) {
-		int posOrigin = origin.getPosition(), posDest = destination.getPosition();
 		
-		if (vertices.get(posOrigin) == origin && vertices.get(posDest) == destination) {
-			adjMatrix[posOrigin][posDest] = weight;
-		}
+		origin = this.search(origin.getData());
+		
+		if (origin == null) return;
+		
+		destination = this.search(destination.getData());
+		
+		if (destination == null) return;
+		
+		adjMatrix[origin.getPosition()][destination.getPosition()] = weight;
+	
 		
 	}
 
 	@Override
 	public void disconnect(Vertex<T> origin, Vertex<T> destination) {
-		int posOrigin = origin.getPosition(), posDest = destination.getPosition();
+		origin = this.search(origin.getData());
 		
-		if (vertices.get(posOrigin) == origin && vertices.get(posDest) == destination) {
-			adjMatrix[posOrigin][posDest] = EMPTY_VALUE;
-		}
+		if (origin == null) return;
+		
+		destination = this.search(destination.getData());
+		
+		if (destination == null) return;
+		
+		adjMatrix[origin.getPosition()][destination.getPosition()] = EMPTY_VALUE;
+		
 	}
 
 	@Override
 	public boolean existsEdge(Vertex<T> origin, Vertex<T> destination) {
-		int posOrigin = origin.getPosition(), posDest = destination.getPosition();
 		
-		if (vertices.get(posOrigin) == origin && vertices.get(posDest) == destination) {
-			return (adjMatrix[posOrigin][posDest] != EMPTY_VALUE);
-		}
+		origin = this.search(origin.getData());
 		
-		return false;
+		if (origin == null) return false;
+		
+		destination = this.search(destination.getData());
+		
+		if (destination == null) return false;
+		
+
+		return (adjMatrix[origin.getPosition()][destination.getPosition()] != EMPTY_VALUE);
+		
 	}
 
 	@Override
@@ -102,19 +113,21 @@ public class AdjMatrixGraph<T> implements Graph<T>{
 
 	@Override
 	public List<Vertex<T>> getVertices() {
-		return vertices;	//QUÉ DEBERIA HACER ACA????
+		return (new ArrayList<>(this.vertices));	//QUÉ DEBERIA HACER ACA????
 	}
 
 	@Override
 	public int weight(Vertex<T> origin, Vertex<T> destination) {
 		
-		int posOrigin = origin.getPosition(), posDest = destination.getPosition();
+		origin = this.search(origin.getData());
 		
-		if (vertices.get(posOrigin) == origin && vertices.get(posDest) == destination) {
-			if (adjMatrix[posOrigin][posDest] != EMPTY_VALUE) return adjMatrix[posOrigin][posDest];	
-		}
+		if (origin == null) return Integer.MIN_VALUE;
 		
-		return 0;
+		destination = this.search(destination.getData());
+		
+		if (destination == null) return Integer.MIN_VALUE;
+		
+		return adjMatrix[origin.getPosition()][destination.getPosition()];
 	}
 
 	@Override
