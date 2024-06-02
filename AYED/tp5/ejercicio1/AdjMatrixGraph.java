@@ -134,17 +134,16 @@ public class AdjMatrixGraph<T> implements Graph<T>{
 	public List<Edge<T>> getEdges(Vertex<T> v) {
 		
 		int pos = v.getPosition();
+		List<Edge<T>> edges = new ArrayList<Edge<T>>();
 		
 		if (vertices.get(pos) == v) {
-			List<Edge<T>> edges = new ArrayList<Edge<T>>();
 			for (int i=0; i<maxVertices; i++) {
 				if (adjMatrix[pos][i] != EMPTY_VALUE) edges.add(new AdjMatrixEdge<T>(vertices.get(i), adjMatrix[pos][i]));
 			}
 			
-			return edges;
 		}
 		
-		return null;
+		return edges;
 	}
 
 	@Override

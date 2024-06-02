@@ -31,7 +31,9 @@ public class Recorridos<T> {
 		elementos.add(v.getData());
 		
 		for (Edge<T> e : grafo.getEdges(v)) {
+			
 			int j = e.target().getPosition();
+			
 			if (!marca[j]) {
 				dfs(j,grafo, marca, elementos);
 			}
@@ -66,7 +68,7 @@ public class Recorridos<T> {
 			for (Edge<T> e : grafo.getEdges(v)) {
 				int j = e.target().getPosition();
 				if (!marca[j]) {
-					marca[j] = true;
+					marca[j] = true;	//Si no estuviera acá, habria posibilidades de que un vertice posterior encole a un vertice ya encolado porque no estaba en TRUE en la marca
 					cola.enqueue(e.target());
 				}
 			}
