@@ -34,7 +34,7 @@ public class Caminos {
 			}
 		}
 		
-		if (ag.hasChildren()) {
+		else {
 			List<GeneralTree<Integer>> children = ag.getChildren();
 			for (GeneralTree<Integer> i : children) {
 				aux.add(i.getData());

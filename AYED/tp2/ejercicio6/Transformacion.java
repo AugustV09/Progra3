@@ -29,7 +29,8 @@ public class Transformacion {
 	
 	private int suma_private(BinaryTree<Integer> arbol) {
 		
-		int suma = 0;										
+		int suma = 0, actual = arbol.getData();	
+		
 		if (arbol.hasLeftChild()) {	
 			
 			suma+= suma_private(arbol.getLeftChild());
@@ -43,7 +44,7 @@ public class Transformacion {
 		
 		arbol.setData(suma);
 		
-		return (suma+arbol.getData());
+		return (suma+actual);
 			
 		
 	}
